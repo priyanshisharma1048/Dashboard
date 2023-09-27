@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>my second table</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        
+        table {
+        text-align: center;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        /* margin-left: 200px; */
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    th {
+        color:black;
+        opacity: 0.7;
+        background-color: skyblue;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #D3EAF5; /* Light blue */
+    }
+
+    tbody tr:nth-child(odd) {
+        background-color: white;
+    }
+
+
+    </style>
+</head>
+
+<body>
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>count</th>
+                <th>name</th>
+                <th>country_id</th>
+                <th>probability</th>
+                <th>operation</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+
+        </tbody>
+    </table>
+
+    <script>
+        const data = {
+            "count": 49469,
+            "name": "nathaniel",
+            "country": [
+                {"country_id": "GH","probability": 0.209},
+                {"country_id": "NG","probability": 0.096},
+                {"country_id": "PH","probability": 0.074},
+                {"country_id": "US","probability": 0.055},
+                {"country_id": "NE","probability": 0.048}
+            ]
+        };
+
+        let count = data['count'];
+        let name = data['name'];
+
+        let tableBody = document.getElementById("tableBody");
+
+        for (let country of data['country']) {
+            let country_id = country['country_id'];
+            let probability = country['probability'];
+            let row = document.createElement("tr");
+            row.innerHTML = `<td>${count}</td>
+                            <td>${name}</td>
+                            <td>${country_id}</td>
+                            <td>${probability}</td>
+                            <td>
+                    <div class="operation-icons">
+                    <span style="padding: 5px;"><i class="far fa-copy"></i> </span><!-- Copy icon -->
+                    <span style="padding: 5px;"><i class="fas fa-pencil-alt"></i></span> <!-- Pencil icon -->
+                    <span style="padding: 5px;"><i class="fas fa-trash"></i></span> <!-- Delete icon -->
+                    </div>
+                </td>`;
+            tableBody.appendChild(row);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+    <title>my table</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* CSS to resize the image */
+        img {
+            max-width: 37px;
+            border-radius: 8px;
+        }
+
+        /* table {
+            border-spacing: 10px;
+            Set spacing between cells
+            border-collapse: separate;
+
+        } */
+
+        /* td {
+            padding: 54px;
+            padding-top: 11px;
+
+        }
+
+        th {
+            color: grey;
+            opacity: 0.7;
+            text-align: center;
+        } */
+
+        .operation-icons {
+            /* margin-right: 10px; Adjust the value to increase/decrease spacing */
+            word-spacing: 10px;
+            color: blue;
+            display: flex;
+            padding-left:100px;
+
+
+        }
+
+        .edit-button {
+            background-color: #007BFF;
+            color: #ffffff;
+            border: none;
+            border-radius: 36px;
+            padding: 9px;
+            cursor: pointer;
+            size: -107px;
+            height: 32px;
+            width: 110px;
+            margin-left: 3;
+        }
+
+        .btn-success {
+            font-family: Raleway-SemiBold;
+            font-size: 13px;
+            color: rgba(103, 192, 103, 0.75);
+            letter-spacing: 1px;
+            line-height: 15px;
+            border: 2px solid rgba(103, 192, 103, 0.75);
+            border-radius: 40px;
+            background: transparent;
+            transition: all 0.3s ease 0s;
+        }
+
+        .btn-success:hover {
+            color: #FFF;
+            background: rgb(103, 192, 103, 0.75);
+            border: 2px solid rgb(103, 192, 103, 0.75);
+        }
+
+        .btn-danger {
+            font-family: Raleway-SemiBold;
+            font-size: 13px;
+            color: rgba(217, 83, 78, 0.75);
+            letter-spacing: 1px;
+            line-height: 15px;
+            border: 2px solid rgba(217, 83, 78, 0.75);
+            border-radius: 40px;
+            background: transparent;
+            transition: all 0.3s ease 0s;
+        }
+
+        .btn-danger:hover {
+            color: #FFF;
+            background: rgba(217, 83, 78, 0.75);
+            border: 2px solid rgba(217, 83, 78, 0.75);
+        }
+        table {
+        text-align: center;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        /* margin-left: 200px; */
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    th {
+        color:black;
+        opacity: 0.7;
+        background-color: skyblue;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #D3EAF5; /* Light blue */
+    }
+
+    tbody tr:nth-child(odd) {
+        background-color: white;
+    }
+
+   
+    </style>
+</head>
+
+<body>
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>photo</th>
+                <th>Membername</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Operation</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+
+        </tbody>
+    </table>
+</body>
+<script>
+    // debugger
+    let table = document.getElementById("tableBody")
+    fetch("https://reqres.in/api/users")
+        .then((response) => response.json())
+        .then((data) => {
+            let x = data.data
+            for (user of x) {
+                let fullName = `${user['first_name']} ${user['last_name']}`
+                let id = `${user['id']}`
+                let email = `${user["email"]}`
+                let avtar = `${user["avatar"]}`
+                if (id % 2 !== 0) {
+                    button = `<button type="button" class="btn btn-danger">inactive</button>`
+                }
+                else {
+                    button = `<button type="button" class="btn btn-success">Active</button>`
+                }
+                let row = document.createElement("tr")
+                row.innerHTML = ` <td><img src=${avtar} alt="paris" height="20%"></td>
+                <td>${fullName}</td>
+                <td>${id}</td>
+                <td>${email}</td>
+                <td>${button}</td>
+                <td>
+                    <div class="operation-icons">
+                    <span style="padding: 5px;"><i class="far fa-copy"></i> </span><!-- Copy icon -->
+                    <span style="padding: 5px;"><i class="fas fa-pencil-alt"></i></span> <!-- Pencil icon -->
+                    <span style="padding: 5px;"><i class="fas fa-trash"></i></span> <!-- Delete icon -->
+                    </div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger">login</button>
+                   
+                </td>`
+                table.appendChild(row)
+            }
+        })
+
+</script>
+
+</html>
